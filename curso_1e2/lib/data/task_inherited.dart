@@ -8,16 +8,10 @@ class TaskInherited extends InheritedWidget {
   }) : super(child: child);
 
 
-  final List<Task> taskList = [
-    Task('Aprender Flutter', 'assets/images/bird.png', 4),
-    Task('Aprender Java', 'assets/images/java.jpg', 3),
-    Task('Jogar', 'assets/images/Valorant-Logo.png', 2),
-    Task('Meditar', 'assets/images/meditar.jpeg', 1),
-    Task('Ler', 'assets/images/book.jpg', 5),
-  ];
+  final List<Task> taskList = [];
 
-  void newTask(String name, String photo, int difficulty){
-    taskList.add(Task(name, photo, difficulty));
+  void newTask(String name, String photo, int difficulty, int level){
+    taskList.add(Task(name, photo, difficulty, level));
   }
 
   static TaskInherited of(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:curso_1/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 import './difficulty.dart';
@@ -7,8 +8,14 @@ class Task extends StatefulWidget {
   final String foto;
   final int dificuldade;
 
-  Task(this.nome, this.foto, this.dificuldade, {super.key});
+  Task(this.nome, this.foto, this.dificuldade, this.nivel, {super.key});
+
+  Task getTask() {
+    return Task(nome, foto, dificuldade, nivel);
+  }
+
   int nivel = 0;
+
   @override
   State<Task> createState() => _TaskState();
 }
@@ -96,9 +103,21 @@ class _TaskState extends State<Task> {
                       height: 52,
                       width: 52,
                       child: ElevatedButton(
+                          // onLongPress: () {
+                          //
+                          //   TaskDao().delete(widget.nome);
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     const SnackBar(
+                          //       content: Text('Deletando a Tarefa, Recarregue'),
+                          //       behavior: SnackBarBehavior.floating,
+                          //       elevation: 150.0,
+                          //     ),
+                          //   );
+                          // },
                           onPressed: () {
                             setState(() {
                               widget.nivel++;
+                              TaskDao().updateLevel(widget.getTask());
                             });
                             if (mastery >= 1) {
                               levelColor = widget.dificuldade;

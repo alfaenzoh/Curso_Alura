@@ -19,3 +19,4 @@ samples, guidance on mobile development, and a full API reference.
 Contém os dois cursos iniciais da Alura Flutter:
 1 - Widgets, Stateless. Stateful, Imagens e Animações
 2 - Controller, navegação e estados
+3 - Aplicando persistência de dados

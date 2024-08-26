@@ -1,9 +1,11 @@
-import 'package:curso_1/data/task_inherited.dart';
+import 'package:curso_1/components/task.dart';
+import 'package:curso_1/data/task_dao.dart';
+// import 'package:curso_1/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
-
   const FormScreen({super.key, required this.taskContext});
+
   final BuildContext taskContext;
 
   @override
@@ -20,17 +22,17 @@ class _FormScreenState extends State<FormScreen> {
   }
 
   bool difficultyValidator(String? value) {
-     if(value != null && value.isEmpty){
-       if(int.parse(value) > 5 || int.parse(value) < 1){
-         return true;
-       }
-     }
-     return false;
+    if (value != null && value.isEmpty) {
+      if (int.parse(value) > 5 || int.parse(value) < 1) {
+        return true;
+      }
+    }
+    return false;
   }
 
   double offset = 1.0;
   final _formKey =
-  GlobalKey<FormState>(); //observa as validacoes/estado do formulario
+      GlobalKey<FormState>(); //observa as validacoes/estado do formulario
 
   @override
   Widget build(BuildContext context) {
@@ -137,14 +139,21 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   ElevatedButton(
                       onPressed: () {
+                        int level = 0;
                         if (_formKey.currentState!.validate()) {
                           //dados validados
-                          TaskInherited.of(widget.taskContext).newTask(
-                              nameController.text, imageController.text,
-                              int.parse(difficultyController.text));
+                          TaskDao().save(Task(
+                              nameController.text,
+                              imageController.text,
+                              int.parse(difficultyController.text),
+                              level,
+                          ));
+                          // TaskInherited.of(widget.taskContext).newTask(
+                          //     nameController.text, imageController.text,
+                          //     int.parse(difficultyController.text));
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Salvando nova Tarefa'),
+                              content: Text('Salvando nova Tarefa, Recarregue'),
                               behavior: SnackBarBehavior.floating,
                               elevation: 150.0,
                             ),
