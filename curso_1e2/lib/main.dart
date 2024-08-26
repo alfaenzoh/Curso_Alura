@@ -2,6 +2,8 @@ import 'package:curso_1/screens/form_screen.dart';
 import 'package:curso_1/screens/initial_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'data/task_inherited.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const InicialtScereen(),
+      home: TaskInherited(child: const InicialtScereen()),
     );
   }
 }

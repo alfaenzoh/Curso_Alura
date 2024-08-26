@@ -7,33 +7,41 @@ class Task extends StatefulWidget {
   final String foto;
   final int dificuldade;
 
-  const Task(this.nome, this.foto, this.dificuldade, {super.key});
-
+  Task(this.nome, this.foto, this.dificuldade, {super.key});
+  int nivel = 0;
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0, levelColor = 0;
+  int levelColor = 0;
   double mastery = 0;
   final Map<int, Color> colorMap = {
     1: const Color.fromARGB(255, 154, 181, 48), // Verde oliva mais escuro
-    2: const Color.fromARGB(255, 227, 121, 0),  // Laranja queimado
-    3: const Color.fromARGB(255, 204, 68, 0),   // Laranja-avermelhado intenso
-    4: const Color.fromARGB(255, 153, 0, 0),    // Vermelho escuro profundo
+    2: const Color.fromARGB(255, 227, 121, 0), // Laranja queimado
+    3: const Color.fromARGB(255, 204, 68, 0), // Laranja-avermelhado intenso
+    4: const Color.fromARGB(255, 153, 0, 0), // Vermelho escuro profundo
     5: Colors.black,
   };
 
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    mastery = (nivel / widget.dificuldade) / 10;
+    mastery = (widget.nivel / widget.dificuldade) / 10;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4), color: colorMap[levelColor] ?? Colors.blue),
+                borderRadius: BorderRadius.circular(4),
+                color: colorMap[levelColor] ?? Colors.blue),
             height: 140,
           ),
           Column(
@@ -56,10 +64,15 @@ class _TaskState extends State<Task> {
                         width: 72,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
-                          child: Image.asset(
-                            widget.foto,
-                            fit: BoxFit.cover,
-                          ),
+                          child: assetOrNetwork()
+                              ? Image.asset(
+                                  widget.foto,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  widget.foto,
+                                  fit: BoxFit.cover,
+                                ),
                         )),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +98,7 @@ class _TaskState extends State<Task> {
                       child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              nivel++;
+                              widget.nivel++;
                             });
                             if (mastery >= 1) {
                               levelColor = widget.dificuldade;
@@ -122,7 +135,7 @@ class _TaskState extends State<Task> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Nivel: $nivel',
+                      'Nivel: ${widget.nivel}',
                       style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),

@@ -1,6 +1,7 @@
+import 'package:curso_1/data/task_inherited.dart';
+import 'package:curso_1/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../components/task.dart';
 
 class InicialtScereen extends StatefulWidget {
   const InicialtScereen({super.key});
@@ -19,42 +20,20 @@ class _InicialtScereenState extends State<InicialtScereen> {
         leading: Container(),
         title: const Text('Tarefas'),
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1 : 0,
-        duration: const Duration(milliseconds: 800),
-        child: ListView(
-          children: const [
-            Task(
-                'Aprender Flutter',
-                'assets/images/bird.png',
-                4),
-            Task('Aprender Java',
-                'assets/images/java.jpg', 3),
-            Task(
-                'Jogar',
-                'assets/images/Valorant-Logo.png',
-                2),
-            Task(
-                'Meditar',
-                'assets/images/meditar.jpeg',
-                1),
-            Task(
-                'Ler',
-                'assets/images/book.jpg',
-                5),
-            SizedBox(
-              height: 80,
-            )
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
+        children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            opacidade = !opacidade;
-          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (contextNew) => FormScreen(taskContext: context,),
+            ),
+          );
         },
-        child: const Icon(Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
     );
   }
