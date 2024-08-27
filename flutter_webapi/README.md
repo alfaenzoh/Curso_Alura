@@ -38,4 +38,10 @@ Gostou do projeto e quer conhecer mais? Você pode [acessar o curso](https://cur
 
 Esse curso faz parte da [formação de Flutter da Alura](https://cursos.alura.com.br/formacao-flutter)
 
+- [Enzo] Sobre a api, rodar no terminal o seguinte comando:
+  json-server --watch --host "meu ip" db.json
+
+- substitua o "meu ip" pelo ip da maquina
+
+- Feito: Flutter com WebAPI: integrando sua aplicação
 *Te vejo lá!*
