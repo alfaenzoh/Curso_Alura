@@ -39,9 +39,14 @@ Gostou do projeto e quer conhecer mais? Você pode [acessar o curso](https://cur
 Esse curso faz parte da [formação de Flutter da Alura](https://cursos.alura.com.br/formacao-flutter)
 
 - [Enzo] Sobre a api, rodar no terminal o seguinte comando:
-  json-server --watch --host "meu ip" db.json
+  `json-server --watch --host "meu ip" db.json`
+- ou com atutenticacao de usuarios:
+- json-server-auth --watch --host "meu ip" db.json -r routes.json;
 
-- substitua o "meu ip" pelo ip da maquina
+- substitua o "meu ip" pelo ip da maquina;
+- nao esquecer de verificar se o ipv4 vai mudar sempre que reiniciar o pc; 
+- se mudar, trocar o "meu ip" e o url do journal_service.dart;
 
-- Feito: Flutter com WebAPI: integrando sua aplicação
+[Documentação Json Server Auth](https://www.npmjs.com/package/json-server-auth)
+- Feito: Flutter com WebAPI: integrando sua aplicação; evoluindo na integração da aplicação;  
 *Te vejo lá!*

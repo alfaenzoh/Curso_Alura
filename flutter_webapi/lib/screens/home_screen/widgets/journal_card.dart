@@ -1,21 +1,38 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
+import 'package:flutter_webapi_first_course/screens/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../helpers/logout.dart';
+import '../../commom/exception_dialog.dart';
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
   final Function refreshFunction;
+  final int userId;
+  final String token;
 
-  const JournalCard({Key? key, this.journal, required this.showedDate, required this.refreshFunction})
+  const JournalCard(
+      {Key? key,
+      this.journal,
+      required this.showedDate,
+      required this.refreshFunction,
+      required this.userId,
+      required this.token})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (journal != null) {
       return InkWell(
-        onTap: () {},
+        onTap: () {
+          callAddJournalScreen(context, journal: journal);
+        },
         child: Container(
           height: 115,
           margin: const EdgeInsets.all(8),
@@ -76,6 +93,11 @@ class JournalCard extends StatelessWidget {
                   ),
                 ),
               ),
+              IconButton(
+                  onPressed: () => {
+                        removeJournal(context),
+                      },
+                  icon: const Icon(Icons.delete))
             ],
           ),
         ),
@@ -98,24 +120,74 @@ class JournalCard extends StatelessWidget {
     }
   }
 
-  callAddJournalScreen(BuildContext context) {
-    Navigator.pushNamed(context, 'add-journal',
-      arguments: Journal(
-          id: const Uuid().v1(),
-          content: " ",
-          createdAt: showedDate,
-          updatedAt: showedDate),
-    ).then((value){
+  callAddJournalScreen(BuildContext context, {Journal? journal}) {
+    Journal innerJournal = Journal(
+      id: const Uuid().v1(),
+      content: " ",
+      createdAt: showedDate,
+      updatedAt: showedDate,
+      userId: userId,
+    );
+    Map<String, dynamic> map = {};
+
+    if (journal != null) {
+      innerJournal = journal;
+      map['is_editing'] = true;
+    } else {
+      map['is_editing'] = false;
+    }
+
+    map['journal'] = innerJournal;
+
+    Navigator.pushNamed(
+      context,
+      'add-journal',
+      arguments: map,
+    ).then((value) {
       refreshFunction();
-      if(value != null && value == true){
+      if (value != null && value == true) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Registro feito com sucesso!"))
-        );
-      }else{
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Houve uma falha ao registrar"))
-        );
+            const SnackBar(content: Text("Registro feito com sucesso!")));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Operação cancelada")));
       }
     });
+  }
+
+  removeJournal(BuildContext context) {
+    JournalService service = JournalService();
+
+    if (journal != null) {
+      showConfirmationDialog(
+        context,
+        content:
+            "Deseja remover o diario da data: ${WeekDay(journal!.createdAt)}?",
+        affirmative: "Remover",
+      ).then(
+        (value) {
+          if (value != null && value) {
+            service.delete(journal!.id, token).then((value) {
+              if (value) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Removido com sucesso!")));
+                refreshFunction();
+              }
+            });
+          }
+        },
+      ).catchError(
+        (error) {
+          logout(context);
+        },
+        test: (error) => error is TokenNotValidException,
+      ).catchError(
+        (error) {
+          var innerError = error as HttpException;
+          showExceptionDialog(context, content: innerError.message);
+        },
+        test: (error) => error is HttpException,
+      );
+    }
   }
 }

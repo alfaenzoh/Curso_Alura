@@ -1,59 +1,68 @@
 {
-  "learnhttp": {},
+  "users": [
+    {
+      "email": "teste@gmail.com",
+      "password": "$2a$10$TUpp72emCjtqTlmLdspCaezNwS.xr9CmDKGDlsc4MRJuwhAUjE3dq",
+      "id": 1
+    },
+    {
+      "email": "luiz@gmail.com",
+      "password": "$2a$10$QmZJAFEjId7Ni7rqfKpUPOeGWBEz6sjnq./ArlN3YuhdmbuKH7/Xa",
+      "id": 2
+    },
+    {
+      "email": "enzo@gmail.com",
+      "password": "$2a$10$ARWuC.DRNW8xiYjfOv3k6uIftaq.P.NXWeNJlix9JGnFPUnOzN5oe",
+      "id": 3
+    },
+    {
+      "email": "enzo@hotmail.com",
+      "password": "$2a$10$0vLVWhPCV9B1iYrLf27LOeZbJFB7rzB/Wg2u7Zlqq.bfcEQEO96IG",
+      "id": 4
+    }
+  ],
   "journals": [
     {
-      "id": "b4894090-64a5-11ef-b8d1-fb21f8bd6d23",
-      "content": "asdfasdfaefasf",
-      "created_at": "2024-08-24 15:26:58.543558",
-      "updated_at": "2024-08-24 15:26:58.543558"
-    },
-    {
-      "id": "bbbf90d0-64a5-11ef-b8d1-fb21f8bd6d23",
-      "content": "aSDASDASdaasdasasdasd",
-      "created_at": "2024-08-24 15:26:58.543558",
-      "updated_at": "2024-08-24 15:26:58.543558"
-    },
-    {
-      "id": "0cfa5e00-64a9-11ef-a371-d9fe90ad3bf9",
-      "content": "hahahaha",
-      "created_at": "2024-08-18 16:07:49.767728",
-      "updated_at": "2024-08-18 16:07:49.767728"
-    },
-    {
       "id": "1a37b0d0-64aa-11ef-a371-d9fe90ad3bf9",
-      "content": "Eeita segunda é duro",
+      "content": "Eeita segunda é tenso",
       "created_at": "2024-08-19 16:07:49.767728",
-      "updated_at": "2024-08-19 16:07:49.767728"
+      "updated_at": "2024-08-29 09:11:37.759299",
+      "userId": 1
     },
     {
       "id": "473e5fb0-64ab-11ef-93ee-cb5f12b5be80",
       "content": "de novo segunda",
       "created_at": "2024-08-19 16:27:32.526612",
-      "updated_at": "2024-08-19 16:27:32.526612"
-    },
-    {
-      "id": "53f97fa0-64ab-11ef-93ee-cb5f12b5be80",
-      "content": "oi\n",
-      "created_at": "2024-08-20 16:27:32.526612",
-      "updated_at": "2024-08-20 16:27:32.526612"
-    },
-    {
-      "id": "cba845d0-64ac-11ef-93ee-cb5f12b5be80",
-      "content": "oi",
-      "created_at": "2024-08-21 16:27:32.526612",
-      "updated_at": "2024-08-21 16:27:32.526612"
-    },
-    {
-      "id": "fd253dc0-64b1-11ef-93ee-cb5f12b5be80",
-      "content": "aaa",
-      "created_at": "2024-08-22 16:27:32.526612",
-      "updated_at": "2024-08-22 16:27:32.526612"
+      "updated_at": "2024-08-19 16:27:32.526612",
+      "userId": 2
     },
     {
       "id": "0b68ab60-64b2-11ef-93ee-cb5f12b5be80",
       "content": "eba sabado",
       "created_at": "2024-08-24 16:27:32.526612",
-      "updated_at": "2024-08-24 16:27:32.526612"
+      "updated_at": "2024-08-24 16:27:32.526612",
+      "userId": 2
+    },
+    {
+      "id": "5eaaa6d0-6600-11ef-a016-55b5074ec458",
+      "content": " adoro segundas",
+      "created_at": "2024-08-19 09:15:22.551301",
+      "updated_at": "2024-08-19 09:15:22.551301",
+      "userId": 4
+    },
+    {
+      "id": "87375bc0-6600-11ef-a016-55b5074ec458",
+      "content": " terca",
+      "created_at": "2024-08-20 09:15:22.551301",
+      "updated_at": "2024-08-20 09:15:22.551301",
+      "userId": 4
+    },
+    {
+      "id": "a67a22b0-6600-11ef-a016-55b5074ec458",
+      "content": " segundaaaa",
+      "created_at": "2024-08-26 09:15:22.551301",
+      "updated_at": "2024-08-26 09:15:22.551301",
+      "userId": 4
     }
   ]
 }
